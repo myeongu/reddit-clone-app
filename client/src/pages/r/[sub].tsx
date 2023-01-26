@@ -4,23 +4,15 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Image from 'next/image';
 import { useAuthState } from '@/src/context/auth';
+import SideBar from '@/src/components/SideBar';
 
 function SubPage() {
     const [ownSub, setOwnSub] = useState(false);
     const { authenticated, user } = useAuthState();
 
-    const fetcher = async (url:string) => {
-        try {
-            const res = await axios.get(url);
-            return res.data;
-        } catch (error: any) {
-            throw error.response.data;
-        }
-    }
-
     const router = useRouter();
     const subName = router.query.sub;
-    const { data: sub, error } = useSWR(subName ? `/subs/${subName}` : null, fetcher);
+    const { data: sub, error } = useSWR(subName ? `/subs/${subName}` : null);
 
     useEffect(() => {
       if (!sub || !user) return;
@@ -114,7 +106,8 @@ function SubPage() {
                 </div>
                 {/* posts & sidebar */}
                 <div className='flex max-w-5xl px-4 pt-5 mx-auto'>
-
+                    <div className='w-full md:mr-3 md:w-8/12'></div>
+                    <SideBar sub={sub} />
                 </div>
             </>
         )}
