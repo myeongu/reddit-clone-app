@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import jwt from 'jsonwebtoken';
-import { User } from "../entities/User";
+import User from "../entities/User";
 import userMiddleware from "../middlewares/user"
 import authMiddleware from "../middlewares/auth"
 import { isEmpty } from "class-validator";

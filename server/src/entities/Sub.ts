@@ -1,6 +1,6 @@
 import { Expose } from "class-transformer";
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
-import { User } from "./User";
+import User from "../entities/User";
 import BaseEntity from "./Entity"
 import Post from "./Post";
 
