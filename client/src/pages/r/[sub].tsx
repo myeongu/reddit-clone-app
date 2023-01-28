@@ -5,6 +5,8 @@ import useSWR from 'swr';
 import Image from 'next/image';
 import { useAuthState } from '@/src/context/auth';
 import SideBar from '@/src/components/SideBar';
+import { Post } from '@/src/types';
+import PostCard from '@/src/components/PostCard';
 
 function SubPage() {
     const [ownSub, setOwnSub] = useState(false);
@@ -12,7 +14,7 @@ function SubPage() {
 
     const router = useRouter();
     const subName = router.query.sub;
-    const { data: sub, error } = useSWR(subName ? `/subs/${subName}` : null);
+    const { data: sub, error, mutate } = useSWR(subName ? `/subs/${subName}` : null);
 
     useEffect(() => {
       if (!sub || !user) return;
@@ -46,6 +48,18 @@ function SubPage() {
             fileInput.click();
         }
     }
+
+    let renderPosts;
+    if (!sub) {
+        renderPosts = <p className='text-lg text-center'>로딩중...</p>;
+    } else if (sub.posts.length === 0) {
+        renderPosts = <p className='text-lg text-center'>아직 작성된 포스트가 없습니다.</p>;
+    } else {
+        renderPosts = sub.posts.map((post: Post) => (
+            <PostCard key={post.identifier} post={post} subMutate={mutate} />
+        ))
+    }
+
   return (
     <>
         {sub && (
@@ -106,7 +120,7 @@ function SubPage() {
                 </div>
                 {/* posts & sidebar */}
                 <div className='flex max-w-5xl px-4 pt-5 mx-auto'>
-                    <div className='w-full md:mr-3 md:w-8/12'></div>
+                    <div className='w-full md:mr-3 md:w-8/12'>{renderPosts}</div>
                     <SideBar sub={sub} />
                 </div>
             </>
