@@ -47,7 +47,7 @@ const PostCard = ({
         id={identifier}
     >
         {/* Vote section */}
-        <div className='flex-shrink-0 w-10 py-2 text-center rounded-l'>
+        <div className='flex-shrink-0 w-10 py-2 text-center border-r rounded-l'>
             {/* Upvote */}
             <div
                 className='flex justify-center w-6 mx-auto text-gray-400 roudned cursor-pointer hover:bg-gray-300 hover:text-red-500'
@@ -72,6 +72,7 @@ const PostCard = ({
         </div>
         {/* post data */}
         <div className='w-full p-2'>
+            <div className='flex items-center'>
                 {!isInSubPage && (
                     <div className='flex items-center'>
                         <Link href={`/r/${subName}`}>
@@ -92,17 +93,18 @@ const PostCard = ({
                         <span className='mx-1 text-xs text-gray-500'></span>
                     </div>
                 )}
-            <p className='text-xs text-gray-500'>
-                Posted by
-                <Link href={`/u/${username}`}>
-                    <span className='mx-1 hover:underline'>/u/{username}</span>
-                </Link>
-                <Link href={url}>
-                    <span className='mx-1 hover:underline'>
-                        {dayjs(createdAt).format('YYYY-MM-DD HH:mm')}
-                    </span>
-                </Link>
-            </p>
+                <p className='text-xs text-gray-500'>
+                    Posted by
+                    <Link href={`/u/${username}`}>
+                        <span className='mx-1 hover:underline'>/u/{username}</span>
+                    </Link>
+                    <Link href={url}>
+                        <span className='mx-1 hover:underline'>
+                            {dayjs(createdAt).format('YYYY-MM-DD HH:mm')}
+                        </span>
+                    </Link>
+                </p>
+            </div>
             <Link 
                 href={url}
                 className="my-1 text-lg font-medium">
