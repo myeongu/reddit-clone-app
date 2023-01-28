@@ -56,7 +56,7 @@ function SubPage() {
         renderPosts = <p className='text-lg text-center'>아직 작성된 포스트가 없습니다.</p>;
     } else {
         renderPosts = sub.posts.map((post: Post) => (
-            <PostCard key={post.identifier} post={post} subMutate={mutate} />
+            <PostCard key={post.identifier} post={post} mutate={mutate} />
         ))
     }
 

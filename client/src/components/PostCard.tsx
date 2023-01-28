@@ -10,14 +10,14 @@ import axios from 'axios';
 
 interface PostCardProps {
     post: Post
-    subMutate: () => void
+    mutate?: () => void
 }
 
 const PostCard = ({
     post: {
     identifier, slug, title, body, subName, createdAt, voteScore, userVote, commentCount, url, username, sub,
     },
-    subMutate
+    mutate
 }: PostCardProps) => {
     const router = useRouter();
     const { authenticated } = useAuthState();
@@ -34,7 +34,7 @@ const PostCard = ({
                 slug,
                 value
             })
-            if (subMutate) { subMutate(); }
+            if (mutate) { mutate(); }
         } catch (error) {
             console.log(error);
         }
@@ -79,6 +79,8 @@ const PostCard = ({
                                 src={sub!.imageUrl}
                                 className="w-6 h-6 mr-1 rounded-full cursor-pointer"
                                 alt="sub"
+                                width={24}
+                                height={24}
                             />
                         </Link>
                         <Link
