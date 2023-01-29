@@ -22,7 +22,7 @@ function SubPage() {
     }, [sub])
 
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const uploadImage = async (event: ChangeEvent) => {
+    const uploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files === null) return;
         const file = event.target.files[0];
         console.log("file!!", file)
